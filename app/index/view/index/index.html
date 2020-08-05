@@ -169,11 +169,25 @@
     });
 </script>
 <script>
-    layui.use('layim', function(layim){
+    layui.use(['layim'], function(layim){
+        //建立WebSocket通讯
+        var socket = new WebSocket('ws://localhost:2345');
+        //连接成功时触发
+        socket.onopen = function(){
+            console.log('连接成功')
+            socket.send('握手成功!');
+        };
+
+        //监听收到的消息
+        socket.onmessage = function(res){
+            console.log(JSON.parse(res.data))
+        };
+
         //先来个客服模式压压精
         layim.config({
             title:"即时聊天",
-            min:true
+            min:true,
+
         });
     });
 </script>

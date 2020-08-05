@@ -978,11 +978,12 @@ layui.define(["layer", "laytpl", "upload"],
                             title: "消息盒子",
                             shade: !1,
                             maxmin: !0,
-                            area: ["600px", "520px"],
+                            area: ["100%", "520px"],
                             skin: "layui-box layui-layer-border",
                             resize: !1,
                             content: j.base.msgbox
                         })
+
                 },
                 find: function() {
                     return t.close(ti.find.index),
