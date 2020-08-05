@@ -1795,7 +1795,7 @@ layui.define(["laytpl", "upload-mobile", "layer-mobile", "zepto"], function (i) 
             console.log('qqqq')
             var i = {
                     username: C.mine ? C.mine.username : "访客",
-                    avatar: C.mine ? C.mine.avatar : layui.cache.dir + "css/pc/layim/skin/logo.jpg",
+                    avatar: C.mine ? C.mine.avatar : layui.cache.dir + "css/modules/layim/skin/logo.jpg",
                     id: C.mine ? C.mine.id : null,
                     mine: !0
                 },
