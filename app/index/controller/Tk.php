@@ -25,6 +25,12 @@ class Tk extends BaseController
         return View::fetch();
     }
 
+    public function tkjx_info($id)
+    {
+        View::assign('id',$id);
+        return View::fetch();
+    }
+
     //款列表
     public function k_list(){
         $limit = Request::param('limit');
