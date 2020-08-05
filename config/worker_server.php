@@ -29,7 +29,7 @@ return [
 
     'worker_class'   => 'app\index\controller\Worker', // 自定义Workerman服务类名 支持数组定义多个服务
 
-    /*// 支持事件回调
+    // 支持事件回调
     // onWorkerStart
     'onWorkerStart'  => function ($worker) {
 
@@ -53,5 +53,5 @@ return [
     // onError
     'onError'        => function ($connection, $code, $msg) {
         echo "error [ $code ] $msg\n";
-    },*/
+    },
 ];

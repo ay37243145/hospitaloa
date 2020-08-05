@@ -412,7 +412,7 @@ layui.define(["layer", "laytpl", "upload"],
                 l.first = !0;
                 var u = C = t.open({
                     type: 1,
-                    area: "600px",
+                    area: ["50%","50%"],
                     skin: "layui-box layui-layim-chat",
                     id: "layui-layim-chat",
                     title: "&#8203;",
@@ -425,8 +425,8 @@ layui.define(["layer", "laytpl", "upload"],
                     success: function(a) {
                         w = a,
                             a.css({
-                                "min-width": "500px",
-                                "min-height": "420px"
+                                "min-width": "50%",
+                                "min-height": "50%"
                             }),
                             I(i),
                         "function" == typeof i.success && i.success(a),
@@ -573,7 +573,7 @@ layui.define(["layer", "laytpl", "upload"],
                 if (a) {
                     i.hasClass(o) && O(0 === n ? i.next() : i.prev());
                     var u = w.find(l).length;
-                    return 1 === u ? t.close(C) : (i.remove(), d.remove(), 2 === u && (w.find(".layim-chat-list").hide(), c || w.css("width", "600px"), w.find(".layim-chat-box").css("margin-left", 0)), !1)
+                    return 1 === u ? t.close(C) : (i.remove(), d.remove(), 2 === u && (w.find(".layim-chat-list").hide(), c || w.css("width", "50%"), w.find(".layim-chat-box").css("margin-left", 0)), !1)
                 }
                 i.addClass(o).siblings().removeClass(o),
                     d.addClass(s).siblings(l).removeClass(s),
@@ -978,7 +978,7 @@ layui.define(["layer", "laytpl", "upload"],
                             title: "消息盒子",
                             shade: !1,
                             maxmin: !0,
-                            area: ["100%", "520px"],
+                            area: ["50%", "50%"],
                             skin: "layui-box layui-layer-border",
                             resize: !1,
                             content: j.base.msgbox

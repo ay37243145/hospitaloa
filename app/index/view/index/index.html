@@ -175,18 +175,36 @@
         //连接成功时触发
         socket.onopen = function(){
             console.log('连接成功')
-            socket.send('握手成功!');
+            socket.send(JSON.stringify({
+                type:'con',
+                data:"连接成功！"
+            }));
         };
+
+        //监听发送的消息
+        layim.on('sendMessage', function(res){
+            var mine = res.mine; //包含我发送的消息及我的信息
+            var to = res.to;
+            socket.send(JSON.stringify({
+                type:"send",
+                data:res
+            }))
+        });
 
         //监听收到的消息
         socket.onmessage = function(res){
-            console.log(JSON.parse(res.data))
+            console.log("接收"+JSON.parse(res.data))
         };
 
-        //先来个客服模式压压精
+        //即时通讯配置
         layim.config({
-            title:"即时聊天",
+            title:"即时通讯",
             min:true,
+            init: {
+                url:"{:url('index/aa')}",
+                data: {} //额外参数
+            },
+            msgbox: "{:url('index/msgbox')}" //消息盒子页面地址，若不开启，剔除该项即可
 
         });
     });

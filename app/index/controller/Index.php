@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare (strict_types=1);
 
 namespace app\index\controller;
 
@@ -30,11 +30,37 @@ class Index extends BaseController
         return View::fetch();
     }
 
+
+    //消息盒子
+    public function msgbox(){
+        return View::fetch();
+    }
+
+    //获取用户信息
+    public function aa()
+    {
+        $id = 1;
+        $mime = Db::name('users')->field('id,username,status,sign,avatar')->find($id);
+        $friend_list = Db::name('users')->field('id,username,status,sign,avatar')->select();
+        $friend = [array(
+            'groupname'=>'哈哈',
+            'id'=>1,
+            'list'=>$friend_list
+        )];
+        $list = [
+            'code'=>0,
+            "msg"=>"",
+            "data"=>['mine'=>$mime,"friend"=>$friend]
+        ];
+        return json($list);
+    }
+
     // 获取初始化数据
-    public function getSystemInit(){
+    public function getSystemInit()
+    {
         $homeInfo = [
             'title' => '首页',
-            'href'  => 'index.php/index/index/home1',
+            'href' => 'index.php/index/index/home1',
         ];
         $logoInfo = [
             'title' => '办公系统',
@@ -50,7 +76,8 @@ class Index extends BaseController
     }
 
     // 获取菜单列表
-    private function getMenuList(){
+    private function getMenuList()
+    {
         $menuList = Db::name('system_menu')
             ->field('id,pid,title,icon,href,target')
             ->where('status', 1)
@@ -61,7 +88,8 @@ class Index extends BaseController
     }
 
     //递归获取子菜单
-    private function buildMenuChild($pid, $menuList){
+    private function buildMenuChild($pid, $menuList)
+    {
         $treeList = [];
         foreach ($menuList as $v) {
             if ($pid == $v['pid']) {
