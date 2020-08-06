@@ -193,7 +193,11 @@
 
         //监听收到的消息
         socket.onmessage = function(res){
-            console.log("接收"+JSON.parse(res.data))
+            var msg = JSON.parse(res.data);
+            console.log("接收"+JSON.stringify(msg))
+            if(msg.type === 'receive'){
+                layim.getMessage(msg.data); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+            }
         };
 
         //即时通讯配置

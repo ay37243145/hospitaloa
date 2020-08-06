@@ -4,17 +4,34 @@ declare (strict_types=1);
 namespace app\index\controller;
 
 use app\BaseController;
+use app\index\model\Manager;
 use think\facade\Db;
+use think\facade\Request;
 use think\facade\View;
 
 class Index extends BaseController
 {
+    //加载框架
     public function index()
     {
 //        return url('home1');
         return View::fetch();
     }
 
+    //加载登录页
+    public function login(){
+        return View::fetch();
+    }
+
+    //登录数据处理
+    public function dologin(Request $request){
+        $data = $request::post();
+        //返回模型中的处理结果，把post获取的$data传参给模型Model/manager.php中的checkLogin方法
+        $result = Manager::checkLogin($data);
+        return json($result);
+    }
+
+    //加载主页
     public function home1()
     {
         return View::fetch();
