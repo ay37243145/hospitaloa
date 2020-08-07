@@ -179,5 +179,18 @@ class Index extends BaseController
         }
         return $treeList;
     }
+
+    /*
+     * 加载个人设置页面
+     * */
+    public function user_info(){
+        $user_info = get_user_info();
+        View::assign([
+            'username'=>$user_info['username'],
+            'avatar'=>$user_info['avatar'],
+            'sign'=>$user_info['sign']
+        ]);
+        return View::fetch();
+    }
 }
 
