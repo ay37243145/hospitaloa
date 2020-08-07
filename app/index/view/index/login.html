@@ -37,28 +37,28 @@
         <div class="layui-form login-form">
             <form class="layui-form">
                 <div class="layui-form-item logo-title">
-                    <h1>办公系统</h1>
+                    <h1>LayuiMini后台登录</h1>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
-                    <input type="text" name="username" placeholder="请收入用户名" autocomplete="off" class="layui-input">
+                    <input type="text" name="username" id="username" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" value="">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
-                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    <input type="password" name="password" id="password" placeholder="密码" autocomplete="off" class="layui-input" value="">
                 </div>
-                <!--<div class="layui-form-item">
-                    <label class="layui-icon layui-icon-vercode" for="captcha"></label>
-                    <input type="text" name="captcha" lay-verify="required|captcha" placeholder="图形验证码" autocomplete="off" class="layui-input verification captcha" value="xszg">
-                    <div class="captcha-img">
-                        <img id="captchaPic" src="/Upload/image/captcha.jpg">
-                    </div>
-                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-icon layui-icon-vercode" for="captcha"></label>-->
+<!--                    <input type="text" name="captcha" lay-verify="required|captcha" placeholder="图形验证码" autocomplete="off" class="layui-input verification captcha" value="xszg">-->
+<!--                    <div class="captcha-img">-->
+<!--                        <img id="captchaPic" src="../images/captcha.jpg">-->
+<!--                    </div>-->
+<!--                </div>-->
 <!--                <div class="layui-form-item">-->
 <!--                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">-->
 <!--                </div>-->
                 <div class="layui-form-item">
-                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-filter="login">登&nbsp;&nbsp;&nbsp;&nbsp;陆</button>
+                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
                 </div>
             </form>
         </div>
@@ -80,10 +80,48 @@
             });
         });
 
+        /*$('.layui-btn-fluid').click(function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            $.ajax({
+                url:"{:url('index/dologin')}",
+                type:'Post',
+                dataType:'json',
+                data:{
+                    username:username,
+                    password:password
+                },
+                success:function (res) {
+                    console.log(res)
+                    layer.msg(res.msg, {time: 3000},function () {
+                        if(res.code==3){
+                            location.href='/index.php'
+                        }
+                    })
+                }
+            })
+        })*/
+
         // 进行登录操作
         form.on('submit(login)',function (data) {
-            layer.msg(data,{time:1500},function () {
-                console.log('1')
+            var username = data.field.username;
+            var password = data.field.password;
+            $.ajax({
+                url:"{:url('index/dologin')}",
+                type:'Post',
+                dataType:'json',
+                data:{
+                    username:username,
+                    password:password
+                },
+                success:function (res) {
+                    console.log(res)
+                    layer.msg(res.msg, {time: 1500},function () {
+                        if(res.code==3){
+                            location.href = '/index.php'
+                        }
+                    })
+                }
             })
             return false;
         })

@@ -15,23 +15,34 @@ class Tk extends BaseController
         return View::fetch();
     }
 
+    /*
+     * 条款解析
+     * */
     public function tkjx()
     {
         return View::fetch();
     }
 
+    /*
+     * 支撑材料
+     * */
     public function zccl()
     {
         return View::fetch();
     }
 
+    /*
+     * 当前条款信息
+     * */
     public function tkjx_info($id)
     {
         View::assign('id',$id);
         return View::fetch();
     }
 
-    //款列表
+    /*
+     * 款列表
+     * */
     public function k_list(){
         $limit = Request::param('limit');
 //        $limits = Request::param('limits');

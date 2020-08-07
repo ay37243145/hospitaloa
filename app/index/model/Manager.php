@@ -11,7 +11,9 @@ use think\Model;
 
 class Manager extends Model
 {
-    //处理登录验证
+    /*
+     * 处理登录验证
+     * */
     public static function checkLogin($data)
     {
         //数据的基础验证
@@ -22,12 +24,13 @@ class Manager extends Model
             // 验证失败 输出错误信息
             return array('code'=>0,'msg'=>$e->getError());
         }
-        $user_info = Db::name('user')->where('username',$data['username'])->find();
+        $user_info = Db::name('users')->where('username',$data['username'])->find();
         if(!$user_info){
             return  array('code'=>1,'msg'=>'用户名不存在');
         }elseif ($user_info['password']!=$data['password']){
             return  array('code'=>2,'msg'=>'密码不正确');
         }else{
+            session('user_id',$user_info['id']);
             return  array('code'=>3,'msg'=>'登录成功');
         }
     }
