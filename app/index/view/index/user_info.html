@@ -15,13 +15,11 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
-        <div class="layui-form layuimini-form">
-
+        <form class="layui-form layuimini-form">
             <div class="layui-form-item">
-                <label class="layui-form-label required">用户名</label>
+                <label class="layui-form-label">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空"  value="{$username}" class="layui-input">
+                    <input type="text" name="username" placeholder="请输入姓名"  value="{$username}" class="layui-input">
                     <tip>填写自己的姓名。</tip>
                 </div>
             </div>
@@ -39,7 +37,7 @@
             </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">头像</label>
-                <img name="avatar" src="{$avatar}" width="100" height="100"/>
+                <img name="avatar" id="avatar" src="{$avatar}" width="100" height="100"/>
                 <button type="button" class="layui-btn" id="upload_avatar">
                     <i class="layui-icon">&#xe67c;</i>上传头像
                 </button>
@@ -56,24 +54,60 @@
                     <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <script src="__LAYUI__/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="__LAYUI__/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use(['form','miniTab'], function () {
+    layui.use(['form','miniTab','upload','jquery'], function () {
         var form = layui.form,
             layer = layui.layer,
-            miniTab = layui.miniTab;
+            miniTab = layui.miniTab,
+            upload = layui.upload,
+            $ = layui.jquery;
+
+        /*
+        * 上传头像接口
+        * */
+        var uploadInst = upload.render({
+            elem:'#upload_avatar',
+            url:'{:url("index/upload_avatar")}',
+            done:function (res) {
+                //上传完的回调
+                $('.avatar').attr('src',res.data.path)
+            },
+            error:function () {
+                //请求异常的回调
+                console.log('请求失败')
+            }
+        })
+
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var index = layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            }, function () {
-                layer.close(index);
-                miniTab.deleteCurrentByIframe();
+            var username = data.field.username;
+            var avatar = $('#avatar').attr('src');
+            var sign = data.field.sign;
+            // console.log(sign)
+            // return false;
+            $.ajax({
+                url:"{:url('index/edit_user_info')}",
+                type:'Post',
+                dataType:'json',
+                data:{
+                    username:username,
+                    avatar:avatar,
+                    sign:sign
+                },
+                success:function (res) {
+                    console.log(res)
+                    layer.msg(res.msg, {time: 1500},function () {
+                        if(res.code==2){
+                            miniTab.deleteCurrentByIframe();
+                        }
+                    })
+                }
             });
             return false;
         });

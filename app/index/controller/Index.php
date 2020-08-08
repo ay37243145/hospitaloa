@@ -192,5 +192,22 @@ class Index extends BaseController
         ]);
         return View::fetch();
     }
+
+    /*
+     * 上传头像
+     * */
+    public function upload_avatar(){
+        $data = upload_file('file','image');
+        return json($data);
+    }
+
+    /*
+     * 修改用户信息
+     * */
+    public function edit_user_info(){
+        $data = Request::post();
+        $result = Manager::check_edit_user_info($data);
+        return json($result);
+    }
 }
 

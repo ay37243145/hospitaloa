@@ -18,6 +18,7 @@ class User extends Validate
         'password.min'=>'密码不能小于6位'
     ];
     protected $scene = [
-        'dologin'=>['username','password']
+        'dologin'=>['username','password'],
+        'edit_user_info'=>['username'],
     ];
 }
