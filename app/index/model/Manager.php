@@ -39,21 +39,51 @@ class Manager extends Model
         }
     }
 
+    /*
+     * 处理编辑用户信息验证
+     * */
     public static function check_edit_user_info($data){
         try {
             validate(User::class)->scene('edit_user_info')->check($data);
         } catch (ValidateException $e){
             return rMsg(0,$e->getError());
         }
-        $save = Db::name('users')->save([
+        $updata = Db::name('users')->where('id',session('user_id'))->update([
             'username'=>$data['username'],
             'avatar'=>$data['avatar'],
             'sign'=>$data['sign']
         ]);
-        if($save){
+        if($updata){
             return rMsg(2,'保存成功');
         }else{
             return rMsg(1,'保存失败，请重试！');
+        }
+    }
+
+    /*
+     * 处理修改密码验证
+     * */
+    public static function check_re_pwd($data){
+        try {
+            validate(User::class)->scene('re_pwd')->check($data);
+        } catch (ValidateException $e){
+            return rMsg(0,$e->getError());
+        }
+        //当前用户信息
+        $user_info = Db::name('users')->find(session('user_id'));
+        if($data['old_password']!=$user_info['password']){
+            return rMsg(1,'旧密码输入不正确');
+        }elseif ($data['old_password']==$data['new_password']){
+            return rMsg(2,'新密码不能和旧密码一样');
+        }elseif ($data['new_password']!=$data['again_password']){
+            return rMsg(3,'两次输入密码不一致');
+        }else{
+            $updata = Db::name('users')->where('id',session('user_id'))->update(['password'=>$data['new_password']]);
+            if(!$updata){
+                return rMsg(4,'密码重置失败，请重试');
+            }else{
+                return rMsg(5,'密码重置成功');
+            }
         }
     }
 }

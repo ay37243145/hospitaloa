@@ -209,5 +209,21 @@ class Index extends BaseController
         $result = Manager::check_edit_user_info($data);
         return json($result);
     }
+
+    /*
+     * 加载修改密码页面
+     * */
+    public function repassword(){
+        return View::fetch();
+    }
+
+    /*
+     * 修改密码
+     * */
+    public function re_pwd(){
+        $data = Request::post();
+        $result = Manager::check_re_pwd($data);
+        return json($result);
+    }
 }
 
