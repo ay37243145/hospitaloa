@@ -42,7 +42,7 @@
             <!--手机端头部菜单-->
             <ul class="layui-nav layui-layout-left layuimini-header-menu layuimini-mobile-show">
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-list-ul"></i> 选择模块</a>
+                    <a href="javascript:;"><i class="fa fa-list-ul"></i> 选择菜单</a>
                     <dl class="layui-nav-child layuimini-menu-header-mobile">
                     </dl>
                 </li>
@@ -162,9 +162,20 @@
         });
 
         $('.login-out').on("click", function () {
-            layer.msg('退出登录成功', function () {
-                window.location = 'page/login-1.html';
-            });
+            $.ajax({
+                url:"{:url('index/logout')}",
+                type:'Post',
+                dataType:'json',
+                data:'',
+                success:function (res) {
+                    console.log(res)
+                    layer.msg(res.msg, function () {
+                        if(res.code==0){
+                            window.location = '/index.php';
+                        }
+                    });
+                }
+            })
         });
     });
 </script>

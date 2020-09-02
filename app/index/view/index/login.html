@@ -104,6 +104,7 @@
 
         // 进行登录操作
         form.on('submit(login)',function (data) {
+            var loading = layer.load(1, {shade: false});
             var username = data.field.username;
             var password = data.field.password;
             $.ajax({
@@ -115,6 +116,7 @@
                     password:password
                 },
                 success:function (res) {
+                    layer.close(loading);
                     console.log(res)
                     layer.msg(res.msg, {time: 1500},function () {
                         if(res.code==3){

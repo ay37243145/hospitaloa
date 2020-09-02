@@ -54,6 +54,19 @@ class Index extends BaseController
     }
 
     /*
+     * 退出登录
+     * */
+    public function logout(){
+        session('user_id',null);
+        if(empty(session('user_id'))){
+            $result = ['code'=>0,'msg'=>'退出登录成功'];
+        }else{
+            $result = ['code'=>1,'msg'=>'退出失败，请重试'];
+        }
+        return json($result);
+    }
+
+    /*
      * 加载主页
      * */
     public function home1()

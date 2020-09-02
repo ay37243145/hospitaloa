@@ -1,12 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>基本资料</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__LAYUI__/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="__LAYUI__/css/public.css" media="all">
 </head>
-<body>
-    {$id}
+<body style="background-color: #FFFFFF">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>第一章 保证妇幼保健院正确的发展方向</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote layui-quote-nm">一、坚持妇幼卫生工作方针，保证正确的发展方向</blockquote>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>评审标准</th>
+                <th>评审要点</th>
+                <th>检查方法</th>
+            </tr>
+            <tr>
+                <th colspan="3">1.1.1坚持“以保健为中心、以保障生殖健康为目的，保健和临床相结合，面向群体、面向基层和预防为主”的妇幼卫生工作方针。</th>
+            </tr>
+        </thead>
+        <tbody>
+            {if condition='$ys_title_count eq 1 '}
+            <tr>
+                <td rowspan="{$ys_title_count}" width="200">{$k_list.title}&nbsp;&nbsp;{$k_list.info}</td>
+                <td width="400">
+                    【C】
+                    <br>
+                    {volist name="c_ys_list" id="c_list"}
+                    {$c_list.title_sort}{$c_list.info}
+                    <br>
+                    {/volist}
+                </td>
+                <td rowspan="{$ys_title_count}">
+                    实地查看：查看...
+                    <br>
+                    访谈内容：访谈...
+                    <br>
+                    查阅资料：查阅...
+                </td>
+            </tr>
+            {elseif condition="$ys_title_count eq 2"}
+            <tr>
+                <td rowspan="{$ys_title_count}" width="200">{$k_list.title}&nbsp;&nbsp;{$k_list.info}</td>
+                <td width="400">
+                    【C】
+                    <br>
+                    {volist name="c_ys_list" id="c_list"}
+                    {$c_list.title_sort}{$c_list.info}
+                    <br>
+                    {/volist}
+                </td>
+                <td rowspan="{$ys_title_count}">
+                    实地查看：查看...
+                    <br>
+                    访谈内容：访谈...
+                    <br>
+                    查阅资料：查阅...
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    【B】符合“C”，并
+                    </br>
+                    {volist name="b_ys_list" id="b_list"}
+                    {$b_list.title_sort}{$b_list.info}
+                    <br>
+                    {/volist}
+                </td>
+            </tr>
+            {elseif condition="$ys_title_count eq 3"}
+            <tr>
+                <td rowspan="{$ys_title_count}" width="200">{$k_list.title}&nbsp;&nbsp;{$k_list.info}</td>
+                <td width="400">
+                    【C】
+                    <br>
+                    {volist name="c_ys_list" id="c_list"}
+                    {$c_list.title_sort}{$c_list.info}
+                    <br>
+                    {/volist}
+                </td>
+                <td rowspan="{$ys_title_count}">
+                    实地查看：查看...
+                    <br>
+                    访谈内容：访谈...
+                    <br>
+                    查阅资料：查阅...
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    【B】符合“C”，并
+                    </br>
+                    {volist name="b_ys_list" id="b_list"}
+                    {$b_list.title_sort}{$b_list.info}
+                    <br>
+                    {/volist}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    【A】符合“B”，并
+                    </br>
+                    {volist name="a_ys_list" id="a_list"}
+                    {$a_list.title_sort}{$a_list.info}
+                    <br>
+                    {/volist}
+                </td>
+            </tr>
+            {else/}
+            <tr>
+                <td colspan="3" align="center">暂无数据</td>
+            </tr>
+            {/if}
+        </tbody>
+    </table>
+    <script src="__LAYUI__/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="__LAYUI__/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'miniTab', 'upload', 'jquery'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                miniTab = layui.miniTab,
+                upload = layui.upload,
+                $ = layui.jquery;
+        })
+    </script>
 </body>
-</html><SCRIPT Language=VBScript><!--
+</html>
+<SCRIPT Language=VBScript><!--
 
-//--></SCRIPT>
+//-->
+</SCRIPT>

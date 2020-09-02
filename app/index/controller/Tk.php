@@ -36,7 +36,32 @@ class Tk extends BaseController
      * */
     public function tkjx_info($id)
     {
-        View::assign('id',$id);
+//        View::assign('id',$id);
+        $k_list = Db::name('k_list')->find($id);
+
+        $ys_title_count = Db::name('ys_list')->field('title')
+                ->where('k_id',$id)->group('title')->count();
+
+        if($ys_title_count==1){
+            $c_ys_list = Db::name('ys_list')->where('k_id',$id)->select();
+            View::assign('c_ys_list',$c_ys_list);
+        }elseif ($ys_title_count==2){
+            $c_ys_list = Db::name('ys_list')->where(['k_id'=>$id,'title'=>'C'])->select();
+            $b_ys_list = Db::name('ys_list')->where(['k_id'=>$id,'title'=>'B'])->select();
+            View::assign('c_ys_list',$c_ys_list);
+            View::assign('b_ys_list',$b_ys_list);
+        }elseif ($ys_title_count==3){
+            $c_ys_list = Db::name('ys_list')->where(['k_id'=>$id,'title'=>'C'])->select();
+            $b_ys_list = Db::name('ys_list')->where(['k_id'=>$id,'title'=>'B'])->select();
+            $a_ys_list = Db::name('ys_list')->where(['k_id'=>$id,'title'=>'A'])->select();
+            View::assign('c_ys_list',$c_ys_list);
+            View::assign('b_ys_list',$b_ys_list);
+            View::assign('a_ys_list',$a_ys_list);
+        }
+
+        View::assign('k_list',$k_list);
+        View::assign('ys_title_count',$ys_title_count);
+
         return View::fetch();
     }
 
@@ -55,6 +80,17 @@ class Tk extends BaseController
             $list['msg'] = '请求失败';
         }
         return json($list);
+    }
+
+    public function aa(){
+        $count = Db::name('ys_list')->field('title')
+            ->where('k_id',1)->group('title')->count();
+        $title_list = Db::name('ys_list')->field('title')
+            ->where('k_id',1)->group('title')->select();
+        foreach ($title_list as $key => $value){
+            dump($key);
+            dump($value);
+        }
     }
 }
 
