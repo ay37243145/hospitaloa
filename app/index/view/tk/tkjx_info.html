@@ -5,6 +5,7 @@
     <title>基本资料</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Conpatible" content="IE=9;IE=8;IE=7">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="__LAYUI__/lib/layui-v2.5.5/css/layui.css" media="all">
     <link rel="stylesheet" href="__LAYUI__/css/public.css" media="all">
@@ -129,8 +130,55 @@
                 miniTab = layui.miniTab,
                 upload = layui.upload,
                 $ = layui.jquery;
-        })
+
+            console.log(1)
+            /*var webObj=document.getElementById("WebOffice1");
+            webObj.Close();*/
+        });
+        //浏览器兼容设置
+        var weboffice = "";
+        //var height = parent.document.getElementById("PrjList").scrollHeight;
+        var height = document.body.clientHeight;
+        height = height - 5
+
+        if (navigator.userAgent.indexOf("Chrome") > 0) {
+            weboffice = "<object id='WebOffice1' type='application/x-itst-activex' align='baseline' border='0'"
+                + "style='LEFT: 0px; WIDTH: 100%; TOP: 0px; HEIGHT: 600px'"
+                + "clsid='{E77E049B-23FC-4DB8-B756-60529A35FAD5}' codebase='../../../WebOffice/WebOffice.cab'"
+                + "event_NotifyCtrlReady='WebOffice1_NotifyCtrlReady'>"
+                + "</object>";
+        }
+
+
+        if (navigator.userAgent.indexOf("Firefox") > 0) {
+            weboffice = "<object id='WebOffice1' type='application/x-itst-activex' align='baseline' border='0'"
+                + "style='LEFT: 0px; WIDTH: 100%; TOP: 0px; HEIGHT: 600px'"
+                + "clsid='{E77E049B-23FC-4DB8-B756-60529A35FAD5}' codebase='../../../WebOffice/WebOffice.cab'"
+                + "event_NotifyCtrlReady='WebOffice1_NotifyCtrlReady'>"
+                + "</object>";
+        }
+
+        else{
+            weboffice = "<OBJECT id='WebOffice1' align='middle' style='LEFT: 0px; WIDTH: 100%; TOP: 0px; HEIGHT:" + height + "px'"
+                + "classid=clsid:E77E049B-23FC-4DB8-B756-60529A35FAD5 codebase='../../../WebOffice/WebOffice.cab'>"
+                + "</OBJECT>";
+        }
+        document.write(weboffice)
     </script>
+    <!--<OBJECT id=WebOffice1 height=520 width="80%" style="LEFT: 0px; TOP: 0px"
+            classid="clsid:E77E049B-23FC-4DB8-B756-60529A35FAD5"
+            codebase="WebOffice.cab#Version=7,0,1,8">
+        <PARAM NAME="_Version" VALUE="65536">
+        <PARAM NAME="_ExtentX" VALUE="2646">
+        <PARAM NAME="_ExtentY" VALUE="1323">
+        <PARAM NAME="_StockProps" VALUE="0">
+    </OBJECT>-->
+    <!--<object id='WebOffice1' type='application/x-itst-activex' align='baseline' border='0'
+    style='LEFT: 0px; WIDTH: 100%; TOP: 0px; HEIGHT: 100%'
+    clsid='{E77E049B-23FC-4DB8-B756-60529A35FAD5}'
+    event_NotifyCtrlReady='WebOffice1_NotifyCtrlReady'>
+    </object>-->
+
 </body>
 </html>
 <SCRIPT Language=VBScript><!--

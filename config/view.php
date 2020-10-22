@@ -30,6 +30,7 @@ return [
 //        '__PUBLIC'=> __DIR__.'/public',
 //        '__LAYUI__'=> '',
         '__LAYUI__'=> '/layui',
+        '__OFFICE__' => '/web_office',
 //        '__JS__' => '/static/javascript',
     ]
 ];

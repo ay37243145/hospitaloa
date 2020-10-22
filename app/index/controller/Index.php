@@ -74,13 +74,7 @@ class Index extends BaseController
         return View::fetch();
     }
 
-    /*
-     * 加载公告
-     * */
-    public function home2()
-    {
-        return View::fetch();
-    }
+
 
     /*
      * 加载待办
