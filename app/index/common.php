@@ -24,6 +24,7 @@ function get_user_info(){
 function upload_file($filename='file',$filepath='images',$rule='fileExt:jpg,jpeg,png,gif,pem,doc,docx|fileMime:image/jpeg,image/gif,image/png,text/plain,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',$maxsize=2465791000,$fileas=false)
 {
     $file = request()->file($filename);
+    $fileas = true;
     try {
         if($file->getSize() > $maxsize){
             return rMsg(0,'上传失败,文件超出大小,请选择'.floor($maxsize/1024/1024) . 'm以内的文件');

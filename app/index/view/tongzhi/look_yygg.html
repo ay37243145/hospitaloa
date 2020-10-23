@@ -62,7 +62,7 @@
 
         table.render({
             elem: '#yygglist',
-            url: '{:url("tk/k_list")}',
+            url: '{:url("tongzhi/yygg_list")}',
             parseData: function (res) {
                 return {
                     "code": res.code,
@@ -75,11 +75,11 @@
             cols: [[
                 // {type: "checkbox", width: 50},
                 {type: 'radio'},
-                {field: 'title', width: 400, title: '公告主题', sort: true, align: "center"},
-                {field: 'is_hx', title: '发布人', align: "center"},
-                {field: 'info', title: '发布时间', align: "center"},
-                {field: 'info', title: '阅读数量', align: "center"},
-                {field: 'info', title: '签收数量', align: "center"},
+                {field: 'title', width: 400, title: '公告主题', align: "center" ,event: 'look', style:'cursor: pointer;'},
+                {field: 'publisher', title: '发布人', align: "center"},
+                {field: 'datetime', title: '发布时间', align: "center"},
+                {field: 'read_num', title: '阅读数量', align: "center"},
+                {field: 'sign_num', title: '签收数量', align: "center"},
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -112,6 +112,24 @@
                     var data = checkStatus.data;
                     layer.alert(JSON.stringify(data));
                     break;
+            }
+        })
+
+        /*
+        * 监听单元格事件
+        * 弹出公告内容
+        * */
+        table.on('tool(yygglist)',function (obj) {
+            var data = obj.data;
+            if(obj.event==='look'){
+                layer.open({
+                    type: 2
+                    ,shade: 0.2
+                    ,maxmin:true
+                    ,shadeClose: true
+                    ,area: ['100%', '100%']
+                    ,content: '../../index/tongzhi/yygg_info?id='+data.id
+                });
             }
         })
 

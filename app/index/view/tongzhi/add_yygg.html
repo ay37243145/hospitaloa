@@ -15,13 +15,13 @@
 <div class="layui-form-item">
     <label class="layui-form-label">公告主题</label>
     <div class="layui-input-block">
-        <input type="text" name="ggzt" placeholder="请输入主题" autocomplete="off" class="layui-input">
+        <input type="text" id="ggzt" name="ggzt" placeholder="请输入主题" autocomplete="off" class="layui-input">
     </div>
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label">公告内容</label>
     <div class="layui-input-block">
-        <textarea id="demo" name="ggnr" style="display: none;"></textarea>
+        <textarea id="ggnr" name="ggnr" class="layui-textarea" style="display: none;"></textarea>
     </div>
 </div>
 <div class="layui-form-item">
@@ -44,9 +44,12 @@
         <button type="button" class="layui-btn" id="testListAction">开始上传</button>
     </div>
 </div>
+<div id="file-list" style="display: none">
+<!--    存储上传的文件-->
+</div>
 <div class="layui-form-item">
     <div class="layui-input-block">
-        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        <button class="layui-btn" id="submit" lay-submit lay-filter="formDemo">立即提交</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     </div>
 </div>
@@ -60,12 +63,7 @@
             element = layui.element,
             layer = layui.layer
             $ = layui.jquery;
-        layedit.build('demo'); //建立编辑器
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
+        var index = layedit.build('ggnr'); //建立编辑器
 
         //执行上传实例
         var demoListView = $('#demoList'), uploadListIns = upload.render({
@@ -113,9 +111,11 @@
                 element.progress('demo', percent); //可配合 layui 进度条元素使用
             },*/
             done: function (res, index, upload) {
-                console.log(res);
+                // console.log(res.data.path);
                 layer.closeAll('loading');
                 if (res.code==1) { //上传成功
+                    var file_data = '<input type="hidden" name="files_path" value="'+res.data.path+'"/>';
+                    $('#file-list').append(file_data);
                     var tr = demoListView.find('tr#upload-' + index)
                         , tds = tr.children();
                     tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
@@ -133,6 +133,36 @@
                 tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
         });
+
+        //提交表单
+        form.on('submit(formDemo)',function () {
+            var obj = document.getElementsByName('files_path');
+            var files = [];
+            for (var i = 0;i<obj.length;i++){
+                files.push(obj[i].value)
+            }
+            // var files = files.join(',');
+            // data['code'] = '1';
+            var ggzt = $('#ggzt').val();
+            var ggnr = layedit.getContent(index);
+            // console.log(data);
+            $.ajax({
+                url:"{:url('tongzhi/add_yygg_list')}",
+                type:"Post",
+                dataType:"json",
+                data: {
+                    files:files.join(','),
+                    title:ggzt,
+                    text:ggnr
+                },
+                success:function(res){
+                    layer.msg(res.msg,function () {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    })
+                }
+            })
+        })
     });
 </script>
 </body>
