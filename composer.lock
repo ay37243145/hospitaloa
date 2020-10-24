@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f87790f8f353aae3726b677f34cdf073",
+    "content-hash": "00217a720dfdb8fb2ecb6d2b9c9c5610",
     "packages": [
         {
             "name": "league/flysystem",
@@ -654,6 +654,100 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "ric/thinkphp6-apidoc",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://gitee.com/tojeekup/thinkphp6-apidoc.git",
+                "reference": "d6744c4705e3596817f3903a374e9af1e1a10dc9"
+            },
+            "require": {
+                "php": ">=7.1.0",
+                "ric/thinkphp6-helper": "^1.0"
+            },
+            "type": "think-extend",
+            "extra": {
+                "think": {
+                    "config": {
+                        "apidoc": "src/config/apidoc.php"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ric\\apidoc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "ric",
+                    "email": "596868636@qq.com"
+                }
+            ],
+            "description": "thinkphp6 API文档自动生成",
+            "keywords": [
+                "apidoc",
+                "api文档",
+                "think",
+                "thinkphp6",
+                "自动生成"
+            ],
+            "time": "2019-09-12T03:53:50+00:00"
+        },
+        {
+            "name": "ric/thinkphp6-helper",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://gitee.com/tojeekup/thinkphp6-helper.git",
+                "reference": "ed4730b7ea109396072dedd95514e904cd316228"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "think": {
+                    "config": {
+                        "codemsg": "src/config/codemsg.php"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ric\\helper\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "ric",
+                    "email": "596868636@qq.com"
+                }
+            ],
+            "description": "think 6 扩展 支持跨应用调用 及所有类注释验证",
+            "keywords": [
+                "helper",
+                "rpc",
+                "think",
+                "thinkphp6",
+                "validate",
+                "注释验证",
+                "跨应用调用"
+            ],
+            "time": "2019-09-23T06:25:11+00:00"
         },
         {
             "name": "topthink/framework",

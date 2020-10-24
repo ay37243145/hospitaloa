@@ -19,7 +19,7 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">公告主题</label>
+                            <label class="layui-form-label">通知标题</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="tkbh" autocomplete="off" class="layui-input">
                             </div>
@@ -44,9 +44,9 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal" lay-event="add">发布医院公告</button>
-                <button class="layui-btn layui-btn-warm" lay-event="edit">编辑选中公告</button>
-                <button class="layui-btn layui-btn-danger" lay-event="delete">删除选中公告</button>
+                <button class="layui-btn layui-btn-normal" lay-event="add">发布培训通知</button>
+                <button class="layui-btn layui-btn-warm" lay-event="edit">编辑选中通知</button>
+                <button class="layui-btn layui-btn-danger" lay-event="delete">删除选中通知</button>
             </div>
         </script>
 
@@ -62,7 +62,7 @@
 
         table.render({
             elem: '#yygglist',
-            url: '{:url("tongzhi/yygg_list")}',
+            url: '{:url("tongzhi/yjpxtz_list")}',
             parseData: function (res) {
                 return {
                     "code": res.code,
@@ -75,11 +75,11 @@
             cols: [[
                 // {type: "checkbox", width: 50},
                 {type: 'radio'},
-                {field: 'title', width: 400, title: '公告主题', align: "center" ,event: 'look', style:'cursor: pointer;'},
-                {field: 'publisher', title: '发布人', align: "center"},
-                {field: 'datetime', title: '发布时间', align: "center"},
-                {field: 'read_num', title: '阅读数量', align: "center"},
-                {field: 'sign_num', title: '签收数量', align: "center"},
+                {field: 'title', width: 400, title: '通知主题', align: "center" ,event: 'look', style:'cursor: pointer;'},
+                {field: 'fbr', title: '发布人', align: "center"},
+                {field: 'fbsj', title: '发布时间', align: "center"},
+                {field: 'ydsl', title: '阅读数量', align: "center"},
+                {field: 'qssl', title: '签收数量', align: "center"},
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -95,13 +95,13 @@
             switch (obj.event) {
                 case 'add':
                     layer.open({
-                        title: '发布医院公告',
+                        title: '发布培训通知',
                         type: 2,
                         shade: 0.2,
                         maxmin:true,
                         shadeClose: true,
                         area: ['100%', '100%'],
-                        content: '../../index/tongzhi/add_yygg',
+                        content: '../../index/tongzhi/add_yjpxtz',
                     });
                     break;
                 case 'edit':
@@ -128,10 +128,10 @@
                     ,maxmin:true
                     ,shadeClose: true
                     ,area: ['100%', '100%']
-                    ,content: '../../index/tongzhi/yygg_info?id='+data.id
+                    ,content: '../../index/tongzhi/pxtz_info?id='+data.id
                     ,success:function () {
                         $.ajax({
-                            url:"{:url('tongzhi/yygg_dj')}",
+                            url:"{:url('tongzhi/pxtz_dj')}",
                             type:"Post",
                             dataType:'json',
                             data:{id:data.id},

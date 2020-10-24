@@ -16,16 +16,43 @@
         {$text|raw|htmlspecialchars_decode}
     </div>
 </fieldset>
+<fieldset class="layui-elem-field">
+    <legend>主讲人</legend>
+    <div class="layui-field-box">
+        {$zjr}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>参与人</legend>
+    <div class="layui-field-box">
+        {$cyr}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>注意事项</legend>
+    <div class="layui-field-box">
+        {$zysx|raw|htmlspecialchars_decode}
+    </div>
+</fieldset>
 <input type="hidden" id="id" value="{$id}" />
 <fieldset class="layui-elem-field">
     <legend>附件</legend>
     <div class="layui-field-box">
         <div class="layui-upload-list">
+            <!--<table class="layui-table" lay-data="{height:315, url:'{:url('tongzhi/pxtz_file_list',['id' => 13])}',id:'test'}" lay-filter="test">
+                <thead>
+                <tr>
+                    <th lay-data="{field:'name'}">文件名</th>
+                    <th lay-data="{fixed: 'right', align: 'center', toolbar: '#barDemo'}" rowspan="2">操作</th>
+                </tr>
+                </thead>
+            </table>-->
             <table class="layui-table" id="test" lay-filter="test">
             <script type="text/html" id="barDemo">
                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="look">查看</a>
                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="upload">下载</a>
             </script>
+            </table>
         </div>
     </div>
 </fieldset>
@@ -39,7 +66,7 @@
 
         table.render({
             elem:"#test",
-            url:"{:url('tongzhi/file_list')}",
+            url:"{:url('tongzhi/pxtz_file_list')}",
             where:{id:$('#id').val()},
             cols:[[
                 {field:'name', title: '文件名'},

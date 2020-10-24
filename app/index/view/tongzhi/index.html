@@ -24,8 +24,8 @@
     <div class="layuimini-main layui-top-box">
         <div class="layui-row layui-col-space10">
 
-            <div class="layui-col-md3" id="yygg">
-                <div class="col-xs-6 col-md-3">
+            <div class="layui-col-md4" id="yygg">
+                <div class="col-xs-6 col-md-4">
                     <div class="panel layui-bg-cyan">
                         <div class="panel-body">
                             <div class="panel-title">
@@ -40,8 +40,8 @@
                 </div>
             </div>
 
-            <div class="layui-col-md3">
-                <div class="col-xs-6 col-md-3">
+            <div class="layui-col-md4" id="yjpxtz">
+                <div class="col-xs-6 col-md-4">
                     <div class="panel layui-bg-blue">
                         <div class="panel-body">
                             <div class="panel-title">
@@ -56,8 +56,8 @@
                 </div>
             </div>
 
-            <div class="layui-col-md3">
-                <div class="col-xs-6 col-md-3">
+            <div class="layui-col-md4" id="kspxtz">
+                <div class="col-xs-6 col-md-4">
                     <div class="panel layui-bg-green">
                         <div class="panel-body">
                             <div class="panel-title">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-col-md3">
+            <!--<div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
                     <div class="panel layui-bg-orange">
                         <div class="panel-body">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
@@ -95,13 +95,15 @@
         var $ = layui.jquery,
             layer = layui.layer,
             echarts = layui.echarts,
-            table = layui.table,
-            $ = layui.jquery;
+            table = layui.table;
 
 
+        /*
+        * 查看医院公告
+        * */
         $('#yygg').on('click',function () {
             layer.open({
-                title: '查看公告',
+                title: '查看医院公告',
                 type: 2,
                 shade: 0.2,
                 maxmin:true,
@@ -110,6 +112,37 @@
                 content: '../../index/tongzhi/look_yygg',
             })
         })
+
+        /*
+        * 查看院级培训通知
+        * */
+        $('#yjpxtz').on('click',function () {
+            layer.open({
+                title: '院级培训通知',
+                type: 2,
+                shade: 0.2,
+                maxmin:true,
+                shadeClose: true,
+                area: ['100%', '100%'],
+                content: '../../index/tongzhi/look_yjpxtz',
+            })
+        })
+
+        /*
+        * 查看院级培训通知
+        * */
+        $('#kspxtz').on('click',function () {
+            layer.open({
+                title: '科室培训通知',
+                type: 2,
+                shade: 0.2,
+                maxmin:true,
+                shadeClose: true,
+                area: ['100%', '100%'],
+                content: '../../index/tongzhi/look_kspxtz',
+            })
+        })
+
         /*$('#yygg').on('click',function () {
             layer.msg('医院公告', {
                 time: 5000, //20s后自动关闭
