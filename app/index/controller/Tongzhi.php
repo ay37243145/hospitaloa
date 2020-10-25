@@ -81,6 +81,7 @@ class Tongzhi extends BaseController
         $data['type'] = 1;
         $data['publisher'] = $user_info['name'];
         $save = Db::name('tongzhi_list')->save($data);
+        $data['signer'] = $user_info['id'];
         if($save){
             return json(rMsg(1,'添加成功'));
         }else{
@@ -98,6 +99,7 @@ class Tongzhi extends BaseController
         $data['fbsj'] = date('Y-m-d H:i:s',time());
         $data['lx'] = 1;
         $data['fbr'] = $user_info['name'];
+        $data['qsr'] = $user_info['id'];
         $save = Db::name('pxtz_list')->save($data);
         if($save){
             return json(rMsg(1,'添加成功'));
@@ -116,6 +118,7 @@ class Tongzhi extends BaseController
         $data['fbsj'] = date('Y-m-d H:i:s',time());
         $data['lx'] = 2;
         $data['fbr'] = $user_info['name'];
+        $data['qsr'] = $user_info['id'];
         $save = Db::name('pxtz_list')->save($data);
         if($save){
             return json(rMsg(1,'添加成功'));
@@ -272,6 +275,46 @@ class Tongzhi extends BaseController
             return json(1);
         }else{
             return json(2);
+        }
+    }
+
+    /*
+     * 签收医院公告
+     * */
+    public function qsyygg($id){
+        $user_info = get_user_info();
+        $list = Db::name('tongzhi_list')->find($id);
+        $qsr_list = explode(',',$list['signer']);
+        foreach ($qsr_list as $key => $value){
+            $qsr_list[$key] = intval($value);
+        }
+        $qsr_list[] = $user_info['id'];
+        $qsr_data = implode(',',$qsr_list);
+        $updata = Db::name('tongzhi_list')->where('id',$id)->update(['signer'=>$qsr_data]);
+        if($updata){
+            return  json(rMsg(1,'签收成功!'));
+        }else{
+            return  json(rMsg(2,'签收失败，请重试！'));
+        }
+    }
+
+    /*
+     * 签收培训通知
+     * */
+    public function qspxtz($id){
+        $user_info = get_user_info();
+        $list = Db::name('pxtz_list')->find($id);
+        $qsr_list = explode(',',$list['qsr']);
+        foreach ($qsr_list as $key => $value){
+            $qsr_list[$key] = intval($value);
+        }
+        $qsr_list[] = $user_info['id'];
+        $qsr_data = implode(',',$qsr_list);
+        $updata = Db::name('pxtz_list')->where('id',$id)->update(['qsr'=>$qsr_data]);
+        if($updata){
+            return  json(rMsg(1,'签收成功!'));
+        }else{
+            return  json(rMsg(2,'签收失败，请重试！'));
         }
     }
 

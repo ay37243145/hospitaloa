@@ -21,7 +21,7 @@
     <legend>附件</legend>
     <div class="layui-field-box">
         <div class="layui-upload-list">
-            <table class="layui-table" id="test" lay-filter="test">
+            <table class="layui-table" id="test" lay-filter="test"></table>
             <script type="text/html" id="barDemo">
                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="look">查看</a>
                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="upload">下载</a>
@@ -29,6 +29,9 @@
         </div>
     </div>
 </fieldset>
+<div style="text-align: center;margin-top: 3%">
+    <button id="qs" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal">签收</button>
+</div>
 <script src="__LAYUI__/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table','jquery','element','layer'], function(){
@@ -55,6 +58,19 @@
             }else if(obj.event=='upload'){
                 layer.msg('下载')
             }
+        })
+
+        $("#qs").click(function () {
+            var id = $("#id").val()
+            $.ajax({
+                url:"{:url('tongzhi/qsyygg')}",
+                type:"Post",
+                dataType:'json',
+                data:{id:id},
+                success:function (res) {
+                    console.log(res)
+                }
+            })
         })
     })
 </script>
